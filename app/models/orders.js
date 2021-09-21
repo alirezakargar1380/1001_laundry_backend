@@ -7,9 +7,6 @@ module.exports = function (sequelize, DataTypes) {
     product_id: {
       type: DataTypes.INTEGER,
     },
-    customer_id: {
-      type: DataTypes.INTEGER,
-    },
     number: {
       type: DataTypes.INTEGER,
     },
@@ -18,6 +15,14 @@ module.exports = function (sequelize, DataTypes) {
     paranoid: true,
     timestamps: false
   });
+
+  orders.associate = (models) =>
+  {
+    orders.hasMany(models.products,{
+      foreignKey: "id",
+      sourceKey: "product_id"
+    })
+  }
 
   return orders;
 };

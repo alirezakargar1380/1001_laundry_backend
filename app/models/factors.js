@@ -16,5 +16,24 @@ module.exports = function (sequelize, DataTypes) {
     timestamps: false
   });
 
+  factors.associate = (models) =>
+  {
+    factors.hasOne(models.customer, {
+      foreignKey: "id",
+      sourceKey: "customer_id"
+    })
+
+    factors.hasMany(models.orders, {
+      foreignKey: "factor_id",
+      sourceKey: "id"
+    })
+
+    // models.orders.belongsTo(factors,{
+    //   foreignKey: "id",
+    //   sourceKey: "factor_id"
+    // })
+
+  }
+
   return factors;
 };

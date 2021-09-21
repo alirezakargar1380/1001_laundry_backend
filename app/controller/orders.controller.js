@@ -30,8 +30,8 @@ exports.add_orders = async (req, res) =>
 exports.get_orders = async (req, res) =>
 {
   try {
-    var result = "helo"
-    response.success(res, req.body)
+    var result = await order_service.get_orders()
+    response.success(res, result)
 
   } catch (e) {
     response.exception(res, e.message)

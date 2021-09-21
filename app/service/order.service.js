@@ -1,13 +1,27 @@
 const {
-  orders
+  orders, factors, customer, products
 } = require("./../models")
 const log = require('../utils/log.utility')
 const Exception = require("../utils/error.utility")
 
-exports.get = async () =>
+exports.get_orders = async () =>
 {
   try {
-    return await livestock_type.findAll()
+    return await factors.findAll({
+      include: [
+        {
+          model: customer,
+        },
+        {
+          model: orders,
+          include: [
+            {
+              model: products
+            }
+          ]
+        },
+      ]
+    })
 
   } catch (error) {
     log.error(error);

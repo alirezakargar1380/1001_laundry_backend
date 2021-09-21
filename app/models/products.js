@@ -13,5 +13,13 @@ module.exports = function (sequelize, DataTypes) {
     timestamps: false
   });
 
+  // products.associate = (models) =>
+  // {
+  //   products.hasMany(models.orders, {
+  //     foreignKey: "product_id",
+  //     sourceKey: "id"
+  //   })
+  // }
+
   return products;
 };
