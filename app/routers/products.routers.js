@@ -1,13 +1,9 @@
 const express = require("express")
 const Route = express.Router();
-const controller = require("./../controller/vaccines.controller")
+const controller = require("./../controller/products.controller")
 
 Route
-    .route("/vaccines/add")
-    .post(controller.add_vaccines)
-
-Route
-    .route("/vaccines/get")
-    .get(controller.get_vaccines)
+    .route("/products/get")
+    .get(controller.get_products)
 
 module.exports = Route
