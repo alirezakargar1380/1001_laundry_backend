@@ -4,10 +4,22 @@ module.exports = function (sequelize, DataTypes) {
     customer_id: {
       type: DataTypes.INTEGER,
     },
+    total_price: {
+      type: DataTypes.INTEGER,
+    },
     date: {
       type: DataTypes.TEXT,
     },
     year: {
+      type: DataTypes.TEXT,
+    },
+    month: {
+      type: DataTypes.TEXT,
+    },
+    day: {
+      type: DataTypes.TEXT,
+    },
+    hour: {
       type: DataTypes.TEXT,
     },
   }, {

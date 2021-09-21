@@ -4,10 +4,12 @@ const {
 const log = require('../utils/log.utility')
 const Exception = require("../utils/error.utility")
 
-exports.get = async () =>
+exports.get = async (where) =>
 {
   try {
-    return await products.findAll()
+    return await products.findAll({
+      where: where
+    })
 
   } catch (error) {
     log.error(error);

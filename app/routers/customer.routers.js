@@ -3,11 +3,11 @@ const Route = express.Router();
 const controller = require("../controller/customer.controller")
 
 Route
-    .route("/add_user")
+    .route("/add_customer")
     .post(controller.add_user)
 
 Route
-    .route("/get_users")
+    .route("/customers/get")
     .get(controller.get_users)
 
 Route

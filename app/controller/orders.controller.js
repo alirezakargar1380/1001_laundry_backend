@@ -1,22 +1,43 @@
 const factor_service = require("../service/factors.service")
 const order_service = require("../service/order.service")
+const products_service = require("../service/products.service")
 const response = require("../utils/response.utitlity");
+const persion_date = require("../utils/persion-date.utiliy");
 
-exports.add_orders = async (req, res) =>
-{
+exports.add_orders = async (req, res) => {
   try {
-    let result = await factor_service.add({
-      customer_id: req.body.customer_id
-    })
-    // console.log(req.body.orders)
     const {orders} = req.body
-    let values = {}
-    for (let i = 0; i < orders.length; i++)
-    {
+    let price = []
+    let total_price = 0
+
+    for (let i = 0; i < orders.length; i++) {
+      const products = await products_service.get({ id: orders[i].product_id })
+      // console.log(products[0].id + " " + orders[i].product_id)
+      // console.log(products[0].price * orders[i].number)
+      price.push(products[0].price * orders[i].number)
+    }
+
+    for (let i = 0; i < price.length; i++) {
+      total_price += price[i];
+    }
+
+    // console.log("total :"+total_price)
+
+    let result = await factor_service.add({
+      customer_id: req.body.customer_id,
+      total_price: total_price,
+      date: persion_date.date(),
+      hour: persion_date.time(),
+      year: persion_date.year(),
+      month: persion_date.month(),
+      day: persion_date.day(),
+    })
+
+    for (let i = 0; i < orders.length; i++) {
       orders[i].factor_id = result.id
       await order_service.add(orders[i])
     }
-    // is factor id
+
     response.success(res, {
       status: true
     })
@@ -27,8 +48,7 @@ exports.add_orders = async (req, res) =>
 
 }
 
-exports.get_orders = async (req, res) =>
-{
+exports.get_orders = async (req, res) => {
   try {
     var result = await order_service.get_orders()
     response.success(res, result)
