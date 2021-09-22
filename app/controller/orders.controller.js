@@ -11,6 +11,8 @@ exports.add_orders = async (req, res) => {
     let total_price = 0
 
     for (let i = 0; i < orders.length; i++) {
+      if (!orders[i].product_id || !orders[i].number)
+        return
       const products = await products_service.get({ id: orders[i].product_id })
       // console.log(products[0].id + " " + orders[i].product_id)
       // console.log(products[0].price * orders[i].number)

@@ -15,7 +15,7 @@ exports.add_user = async (req, res) =>
 exports.get_users = async (req, res) =>
 {
   try {
-    var result = await usersService.select()
+    var result = await usersService.select(req.query)
     response.success(res, result)
 
   } catch (e) {

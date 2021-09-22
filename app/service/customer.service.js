@@ -3,6 +3,7 @@ const {
 } = require("./../models")
 const log = require('../utils/log.utility')
 const Exception = require("../utils/error.utility")
+const { Op } = require("sequelize");
 
 exports.create = async (json) =>
 {
@@ -19,11 +20,16 @@ exports.create = async (json) =>
   }
 }
 
-exports.select = async () =>
+exports.select = async ({name, phone, id}) =>
 {
   try {
-
-    return await customer.findAll()
+    return await customer.findAll({
+      where: {
+        id: { [Op.like]: `%${id}` },
+        name: { [Op.like]: `%${name}%` },
+        phone: { [Op.like]: `%${phone}%` },
+      }
+    })
 
   } catch (error) {
     log.error(error);
