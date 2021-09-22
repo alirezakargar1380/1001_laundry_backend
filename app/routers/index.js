@@ -10,5 +10,6 @@ module.exports = (app) => {
       require("./address.router"),
       require("./vaccines_detail.router"),
       require("./orders.routers"),
+      require("./login.routers"),
   )
 }
