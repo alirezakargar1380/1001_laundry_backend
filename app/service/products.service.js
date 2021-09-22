@@ -20,7 +20,7 @@ exports.get = async (where) =>
 exports.create = async (json) =>
 {
   try {
-    await vaccines.create(json)
+    await products.create(json)
     return {
       status: true
     }
@@ -34,7 +34,7 @@ exports.create = async (json) =>
 exports.delete = async (id) =>
 {
   try {
-    await livestock_type.destroy(
+    await products.destroy(
         {
           where: {
             id: id
